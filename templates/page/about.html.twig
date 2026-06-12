@@ -1,0 +1,22 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}AllGames — About{% endblock %}
+
+{% block body %}
+<section class="text-gray-400 bg-gray-900 body-font">
+    <div class="container px-5 py-24 mx-auto">
+        <div class="flex justify-center w-full mb-10">
+            <img class="w-full max-w-xs object-contain" alt="AllGames" src="{{ asset('images/big-logo-all-games.svg') }}">
+        </div>
+        <div class="flex flex-col text-center w-full mb-12">
+            <h2 class="text-xs text-blue-500 tracking-widest font-medium title-font mb-1">ABOUT</h2>
+            <h1 class="sm:text-3xl text-2xl font-medium title-font text-white">What is AllGames?</h1>
+        </div>
+        <div class="lg:w-2/3 mx-auto leading-relaxed text-lg space-y-4">
+            <p>AllGames is a video game catalog inspired by platforms such as Steam and Epic Games. Browse a curated collection of games organized by genre and editor.</p>
+            <p>Create an account to add games to your personal wishlist and let other players know whether you recommend a game by leaving a review.</p>
+            <p>This project was built with Symfony 6.4, Tailwind CSS, Doctrine ORM, EasyAdmin and Symfony UX Turbo.</p>
+        </div>
+    </div>
+</section>
+{% endblock %}

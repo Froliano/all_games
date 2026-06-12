@@ -1,0 +1,22 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}AllGames — My Wishlist{% endblock %}
+
+{% block body %}
+<section class="text-gray-400 bg-gray-900 body-font">
+    <div class="container px-5 py-12 mx-auto">
+        <div class="flex flex-col text-center w-full mb-8">
+            <h2 class="text-xs text-blue-500 tracking-widest font-medium title-font mb-1">MY GAMES</h2>
+            <h1 class="sm:text-3xl text-2xl font-medium title-font text-white">My wishlist</h1>
+        </div>
+        <div class="flex flex-wrap -m-4">
+            {% for item in wishlistItems %}
+                {% set game = item.game %}
+                {{ include('game/_game_item.html.twig') }}
+            {% else %}
+                <p class="p-4 w-full text-center">Your wishlist is empty. <a href="{{ path('app_game_list') }}" class="text-blue-500">Browse games</a> to add some!</p>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+{% endblock %}

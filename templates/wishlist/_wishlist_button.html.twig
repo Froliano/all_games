@@ -1,0 +1,19 @@
+<turbo-frame id="wishlist-button-{{ game.id }}">
+    <form action="{{ path('app_game_wishlist_toggle', {'id': game.id}) }}" method="post">
+        {% if wishlist %}
+            <button type="submit" class="flex text-white bg-gray-800 border border-blue-500 py-2 px-6 focus:outline-none hover:bg-gray-700 rounded items-center">
+                <svg fill="currentColor" stroke="none" class="w-5 h-5 mr-2 text-blue-500" viewBox="0 0 24 24">
+                    <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
+                </svg>
+                In your wishlist
+            </button>
+        {% else %}
+            <button type="submit" class="flex text-white bg-blue-500 border-0 py-2 px-6 focus:outline-none hover:bg-blue-600 rounded items-center">
+                <svg fill="none" stroke="currentColor" stroke-width="2" class="w-5 h-5 mr-2" viewBox="0 0 24 24">
+                    <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
+                </svg>
+                Add to wishlist
+            </button>
+        {% endif %}
+    </form>
+</turbo-frame>

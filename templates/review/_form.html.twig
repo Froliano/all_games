@@ -1,0 +1,16 @@
+<turbo-frame id="review-form">
+    <div class="border border-gray-800 rounded-lg p-6 bg-gray-900">
+        {% if review.id %}
+            <p class="text-sm text-green-400 mb-3">Your review has been saved. You can update it below.</p>
+        {% endif %}
+        {{ form_start(form, {'action': path('app_review_form', {'id': gameId})}) }}
+            <div class="mb-4">
+                {{ form_row(form.review) }}
+            </div>
+            <div class="mb-4">
+                {{ form_row(form.comment) }}
+            </div>
+            <button type="submit" class="text-white bg-blue-500 border-0 py-2 px-6 focus:outline-none hover:bg-blue-600 rounded">Submit review</button>
+        {{ form_end(form) }}
+    </div>
+</turbo-frame>

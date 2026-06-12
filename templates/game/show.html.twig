@@ -1,0 +1,69 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}AllGames — {{ game.name }}{% endblock %}
+
+{% block body %}
+<section class="text-gray-400 bg-gray-900 body-font overflow-hidden">
+    <div class="container px-5 py-24 mx-auto">
+        <div class="lg:w-4/5 mx-auto flex flex-wrap">
+            <img alt="{{ game.name }}" class="lg:w-1/2 w-full lg:h-auto h-64 object-cover object-center rounded" src="{% if game.imageName %}{{ vich_uploader_asset(game, 'imageFile') }}{% else %}https://dummyimage.com/600x600{% endif %}">
+            <div class="lg:w-1/2 w-full lg:pl-10 lg:py-6 mt-6 lg:mt-0">
+                {% if game.editor %}
+                    <h2 class="text-sm title-font text-gray-500 tracking-widest">{{ game.editor.name }}</h2>
+                {% endif %}
+                <h1 class="text-white text-3xl title-font font-medium mb-1">{{ game.name }}</h1>
+
+                <div class="flex mb-4 flex-wrap gap-2">
+                    {% for genre in game.genres %}
+                        <a href="{{ path('app_genre_show', {'id': genre.id}) }}" class="text-blue-500 text-sm border border-gray-700 rounded px-2 py-1 hover:bg-gray-800">{{ genre.name }}</a>
+                    {% endfor %}
+                </div>
+
+                <p class="leading-relaxed mb-6">{{ game.description }}</p>
+
+                <div class="flex items-center border-b-2 border-gray-800 mb-5 pb-5">
+                    <span class="text-gray-500">Release date</span>
+                    <span class="ml-auto text-white">{{ game.releaseDate|date('F j, Y') }}</span>
+                </div>
+
+                {% if app.user %}
+                    {{ include('wishlist/_wishlist_button.html.twig') }}
+                {% else %}
+                    <a href="{{ path('app_login') }}" class="flex text-white bg-blue-500 border-0 py-2 px-6 focus:outline-none hover:bg-blue-600 rounded">Login to add to wishlist</a>
+                {% endif %}
+            </div>
+        </div>
+
+        <div class="lg:w-4/5 mx-auto mt-16">
+            <h2 class="text-2xl font-medium title-font text-white mb-6">Reviews</h2>
+
+            {% if app.user %}
+                <turbo-frame id="review-form" src="{{ path('app_review_form', {'id': game.id}) }}" class="block mb-10">
+                    <p class="text-gray-500">Loading review form…</p>
+                </turbo-frame>
+            {% endif %}
+
+            <div class="space-y-4">
+                {% for review in game.reviews %}
+                    <div class="border border-gray-800 rounded-lg p-5">
+                        <div class="flex items-center mb-2">
+                            <span class="text-white font-medium">{{ review.user.username }}</span>
+                            {% if review.review %}
+                                <span class="ml-3 text-xs bg-green-900 text-green-300 rounded px-2 py-1">Recommended</span>
+                            {% else %}
+                                <span class="ml-3 text-xs bg-red-900 text-red-300 rounded px-2 py-1">Not recommended</span>
+                            {% endif %}
+                            <span class="ml-auto text-sm text-gray-500">{{ review.createdAt|date('M j, Y') }}</span>
+                        </div>
+                        {% if review.comment %}
+                            <p class="leading-relaxed">{{ review.comment }}</p>
+                        {% endif %}
+                    </div>
+                {% else %}
+                    <p>No reviews yet. Be the first to review this game!</p>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}
